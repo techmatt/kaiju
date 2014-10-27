@@ -28,5 +28,10 @@ struct Parameters
         return std::stoi(getString(s));
     }
 
+    void setInt(const string &s, int value)
+    {
+        parameters[s] = to_string(value);
+    }
+
     map<string, string> parameters;
 };

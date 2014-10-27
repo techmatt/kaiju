@@ -68,7 +68,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,6 +87,7 @@
   <ItemGroup>
     <ClInclude Include="deck.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gameDistribution.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="monster.h" />
     <ClInclude Include="parameters.h" />
@@ -89,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="deck.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameDistribution.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="parameters.cpp" />
@@ -97,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="defaultParams.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="results.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

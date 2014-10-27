@@ -16,7 +16,7 @@ using namespace std;
 // when verbose is true, the game state is outputted to the console.
 // should never be true when actually optimizing.
 //
-const bool verbose = true;
+const bool verbose = false;
 
 //
 // Kaiju-specific includes
@@ -27,3 +27,4 @@ const bool verbose = true;
 #include "monster.h"
 #include "player.h"
 #include "game.h"
+#include "gameDistribution.h"

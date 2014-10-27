@@ -23,7 +23,7 @@ pure1Count=2
 pure2Count=2
 pure3Count=2
 pure4Count=0
-pure5Count=2
+pure5Count=1
 pure6Count=0
 pure7Count=1
 

@@ -8,6 +8,7 @@
     <ClInclude Include="parameters.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="gameDistribution.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -17,8 +18,12 @@
     <ClCompile Include="parameters.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="gameDistribution.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="defaultParams.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="results.csv" />
   </ItemGroup>
 </Project>
