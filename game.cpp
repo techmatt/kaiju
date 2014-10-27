@@ -38,7 +38,7 @@ void Game::runToCompletion(const Parameters &params)
     while (!done)
     {
         if (verbose) cout << endl << "*** begin turn " << turn << endl;
-        displayGameState();
+        displayGameState(params);
         processTurn(params);
         activePlayer = (activePlayer + 1) % players.size();
         turn++;
@@ -66,16 +66,16 @@ void Game::runToCompletion(const Parameters &params)
     }
 
     if (verbose) cout << endl << "*** final game state. total turns: " << turn << endl;
-    displayGameState();
+    displayGameState(params);
 }
 
-void Game::displayGameState() const
+void Game::displayGameState(const Parameters &params) const
 {
     if (!verbose) return;
 
     cout << "score: " << score << endl;
     cout << "information tokens: " << informationTokens << endl;
-    cout << "AI spent tokens: " << spentInformation << endl;
+    cout << "AI spent tokens: " << spentInformation << " / " << params.getInt("spentInformationRequirement") << endl;
     cout << "desperation turns: " << desperationTurns << endl;
     deck.displayGameState();
 
@@ -90,7 +90,7 @@ void Game::displayGameState() const
     cout << " -- monsters" << endl;
     for (int monsterIndex = 0; monsterIndex < (int)monsters.size(); monsterIndex++)
     {
-        cout << "M" << monsterIndex << ": " << monsters[monsterIndex].toString() << endl;
+        cout << "   " << monsters[monsterIndex].toString() << endl;
     }
 }
 
@@ -142,6 +142,8 @@ void Game::processTurn(const Parameters &params)
         double bestOverallScore = 0.0;
         for (int monsterIndex = 0; monsterIndex < (int)monsters.size(); monsterIndex++)
         {
+            if (verbose) cout << "Best score against " << monsters[monsterIndex].name << " -> " << perMonsterCards[monsterIndex].monsterScore << endl;
+
             if (perMonsterCards[monsterIndex].overallScore > bestOverallScore)
             {
                 monsterToFightIndex = monsterIndex;
@@ -209,7 +211,7 @@ vector<MonsterFightData> Game::findBestSubsetPerMonster() const
             for (int monsterIndex = 0; monsterIndex < (int)monsters.size(); monsterIndex++)
             {
                 int monsterScore = monsters[monsterIndex].score(subsetCards, subsetCardCount);
-                double overallScore = monsterScore + 1.0 - subsetCardCount;
+                double overallScore = monsterScore + 1.0 - subsetCardCount * 0.001;
                 if (monsterScore == 0.0)
                     overallScore = 0.0;
 

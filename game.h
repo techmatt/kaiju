@@ -39,7 +39,7 @@ struct Game
 
     vector<MonsterFightData> findBestSubsetPerMonster() const;
 
-    void displayGameState() const;
+    void displayGameState(const Parameters &params) const;
 
     //
     // game state
