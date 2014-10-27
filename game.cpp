@@ -154,7 +154,8 @@ void Game::processTurn(const Parameters &params)
         if (monsterToFightIndex != -1)
         {
             int bestMonsterScore = perMonsterCards[monsterToFightIndex].monsterScore;
-            if (bestMonsterScore == 5 || desperationTurns >= params.getInt("desperationTurnThreshold"))
+            if (bestMonsterScore == 5 ||
+                (bestMonsterScore >= params.getInt("desperationMinScore") && desperationTurns >= params.getInt("desperationTurnThreshold")))
             {
                 fightMonster(params, monsterToFightIndex, perMonsterCards[monsterToFightIndex].cards);
                 return;

@@ -13,6 +13,7 @@ monsterVictoryInformation=1
 #
 spentInformationRequirement=3
 desperationTurnThreshold=2
+desperationMinScore=2
 
 #
 # deck parameters
