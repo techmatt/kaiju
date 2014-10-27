@@ -10,6 +10,11 @@ struct Monster
         anyStrength = _anyStrength;
     }
 
+    string toString() const
+    {
+        return name + to_string(strength[0]) + to_string(strength[1]) + to_string(strength[2]) + to_string(anyStrength);
+    }
+
     //
     // name is used for special-case monster-killing code
     //
@@ -22,13 +27,15 @@ struct Monster
     int anyStrength;
 
     //
-    // score tells you what score you would get if the players attempt
-    // to kill this monster with the given cards. Normally this parameter
-    // would be a vector, but since the AI just computes all 2^(4*N) possible
-    // card combinations, it's faster to avoid the dynamic memory overhead
-    // of std::vector in this one case.
+    // score tells you what score you would get if the players attempt to kill this
+    // monster with the given cards. Cards are indexed by player because some monsters
+    // may depend on the distribution of play.
     //
-    int score(const Card* cards, int cardCount) const;
+    // Normally this parameter would be a vector, but since the AI just computes all
+    // 2^(4*N) possible card combinations, it's faster to avoid the dynamic memory
+    // overhead of std::vector in this one case.
+    //
+    int score(const pair<Card, int>* cards, int cardCount) const;
 };
 
 //

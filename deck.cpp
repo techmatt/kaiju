@@ -61,3 +61,8 @@ void Deck::shuffle()
 {
     random_shuffle(cards.begin(), cards.end());
 }
+
+void Deck::displayGameState() const
+{
+    cout << "cards left in deck: " << cards.size() << endl;
+}

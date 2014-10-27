@@ -12,6 +12,12 @@
 using namespace std;
 
 //
+// when verbose is true, the game state is outputted to the console.
+// should never be true when actually optimizing.
+//
+const bool verbose = true;
+
+//
 // Kaiju-specific includes
 //
 #include "util.h"

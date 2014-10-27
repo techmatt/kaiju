@@ -1,13 +1,44 @@
 
+//
+// for each monster, this stores the best subset of cards to kill that monster
+//
+struct MonsterFightData
+{
+    MonsterFightData()
+    {
+        monsterScore = 0;
+        overallScore = 0.0;
+    }
+
+    //
+    // cards needed to kill and associated index of the player who owns the card
+    //
+    vector< pair<Card, int> > cards;
+
+    //
+    // this is the score the players will gain if they fight the monster with these cards
+    //
+    int monsterScore;
+
+    //
+    // this is how good this subset in, factoring in monsterScore and the number of cards spent
+    //
+    double overallScore;
+};
+
 struct Game
 {
     void init(const Parameters &params);
 
     void runToCompletion(const Parameters &params);
-    void step(const Parameters &params);
+    void processTurn(const Parameters &params);
 
     void spendInformation();
     void discardWorstCard();
+
+    vector<MonsterFightData> findBestSubsetPerMonster() const;
+
+    void displayGameState() const;
 
     //
     // game state
@@ -26,6 +57,7 @@ struct Game
     int informationTokens;
 
     int activePlayer;
+    int turn;
 
     //
     // this is the number of information the AIs have spent since the previous

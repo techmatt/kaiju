@@ -24,6 +24,10 @@ struct Card
         colors[ColorYellow] = yellow;
         colors[ColorBlue] = blue;
     }
+    string toString() const
+    {
+        return "C" + to_string(colors[0]) + to_string(colors[1]) + to_string(colors[2]);
+    }
     CardType type;
     int colors[ColorCount];
 };
@@ -32,6 +36,8 @@ struct Deck
 {
     void init(const Parameters &params);
     void shuffle();
+
+    void displayGameState() const;
 
     vector<Card> cards;
 };

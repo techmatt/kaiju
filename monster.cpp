@@ -13,13 +13,13 @@ void MonsterCollection::init(const Parameters &params)
     monsters.push_back(Monster("triple", monsterBasicTriple, monsterBasicTriple, monsterBasicTriple, 0));
 }
 
-int Monster::score(const Card* cards, int cardCount) const
+int Monster::score(const pair<Card, int>* cards, int cardCount) const
 {
     int colorSum[ColorCount] = { 0, 0, 0 };
 
     for (int cardIndex = 0; cardIndex < cardCount; cardIndex++)
     {
-        const Card &card = cards[cardIndex];
+        const Card &card = cards[cardIndex].first;
         for (int colorIndex = 0; colorIndex < 3; colorIndex++)
             colorSum[colorIndex] += card.colors[colorIndex];
     }
