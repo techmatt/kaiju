@@ -1,17 +1,33 @@
 
 #include "main.h"
 
-void Player::draw(Deck &deck)
+void Player::draw(Deck &deck, bool initialDraw)
 {
-    while (hand.size() <= 4)
+    //
+    // TODO: parameterize max hand size
+    //
+    while (hand.size() < 4)
     {
         if (deck.cards.size() == 0)
         {
+            if (verbose) cout << id << " has no cards left to draw" << endl;
             return;
         }
         hand.push_back(deck.cards[deck.cards.size() - 1]);
         deck.cards.pop_back();
+
+        if (verbose && !initialDraw) cout << id << " draws " << hand[hand.size() - 1].toString() << endl;
     }
+}
+
+void Player::discardMonsterAttackCard(const Card &c)
+{
+    int cardIndex = findFirstIndex(hand, c);
+    Assert(cardIndex != -1, "card not found in hand!");
+
+    removeSwap(hand, cardIndex);
+    
+    if (verbose) cout << id << " attacks with " << c.toString() << endl;
 }
 
 void Player::discardWorstCard()
@@ -27,6 +43,8 @@ void Player::discardWorstCard()
 
     random_shuffle(hand.begin(), hand.end());
     sort(hand.begin(), hand.end(), cardSort);
+
+    if (verbose) cout << "ACTION: " << id << " discards " << hand[hand.size() - 1].toString() << endl;
 
     hand.pop_back();
 }

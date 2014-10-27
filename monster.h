@@ -12,7 +12,7 @@ struct Monster
 
     string toString() const
     {
-        return name + to_string(strength[0]) + to_string(strength[1]) + to_string(strength[2]) + to_string(anyStrength);
+        return name + ":" + to_string(strength[0]) + "-" + to_string(strength[1]) + "-" + to_string(strength[2]) + "-" + to_string(anyStrength);
     }
 
     //

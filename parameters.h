@@ -25,7 +25,7 @@ struct Parameters
 
     int getInt(const string &s) const
     {
-        return std::stoi(s);
+        return std::stoi(getString(s));
     }
 
     map<string, string> parameters;

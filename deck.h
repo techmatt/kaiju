@@ -32,6 +32,13 @@ struct Card
     int colors[ColorCount];
 };
 
+inline bool operator == (const Card &a, const Card &b)
+{
+    return a.colors[0] == b.colors[0] &&
+           a.colors[1] == b.colors[1] &&
+           a.colors[2] == b.colors[2];
+}
+
 struct Deck
 {
     void init(const Parameters &params);

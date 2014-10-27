@@ -35,6 +35,7 @@ struct Game
 
     void spendInformation();
     void discardWorstCard();
+    void fightMonster(const Parameters &params, int monsterIndex, const vector< pair<Card, int> > &cards);
 
     vector<MonsterFightData> findBestSubsetPerMonster() const;
 
