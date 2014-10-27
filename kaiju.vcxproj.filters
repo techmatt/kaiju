@@ -7,6 +7,7 @@
     <ClInclude Include="monster.h" />
     <ClInclude Include="parameters.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -15,6 +16,7 @@
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="parameters.cpp" />
     <ClCompile Include="util.cpp" />
+    <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="defaultParams.txt" />

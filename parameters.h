@@ -1,21 +1,29 @@
 
 struct Parameters
 {
-    Parameters()
+    Parameters(const string &filename)
     {
+        for (const string &line : getFileLines(filename, 3))
+        {
+            if (line[0] != '#')
+            {
+                auto parts = split(line, '=');
+                parameters[parts[0]] = parts[1];
+            }
+        }
     }
 
-    string getString(const string &s)
+    string getString(const string &s) const
     {
         if (parameters.count(s) == 0)
         {
             cout << "parameter not found: " << s << endl;
             return "";
         }
-        return parameters[s];
+        return parameters.find(s)->second;
     }
 
-    int getInt(const string &s)
+    int getInt(const string &s) const
     {
         return std::stoi(s);
     }

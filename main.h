@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -17,4 +18,5 @@ using namespace std;
 #include "parameters.h"
 #include "deck.h"
 #include "monster.h"
+#include "player.h"
 #include "game.h"

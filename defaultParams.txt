@@ -1,0 +1,42 @@
+
+#
+# base parameters
+#
+
+playerCount=4
+monsterCount=4
+startInformationCount=4
+monsterVictoryInformation=1
+
+#
+# AI parameters
+#
+spentInformationRequirement=3
+desperationTurnThreshold=2
+
+#
+# deck parameters
+#
+
+pure1Count=2
+pure2Count=2
+pure3Count=2
+pure4Count=0
+pure5Count=2
+pure6Count=0
+pure7Count=1
+
+double1Count=2
+double2Count=2
+double3Count=2
+
+triple1Count=1
+triple2Count=1
+triple3Count=1
+
+#
+# monster parameters
+#
+
+monsterBasicDouble=12
+monsterBasicTriple=8
