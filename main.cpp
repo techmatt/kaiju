@@ -3,7 +3,7 @@
 
 void testParameter(const Parameters &baseParams, int gameCount, const string &parameterName, int lowValue, int highValue, int increment)
 {
-    ofstream file("results.csv");
+    ofstream file("parameterResults.csv");
     if (file.fail())
     {
         cout << " *** FAILED TO OPEN RESULTS FILE, IN USE BY ANOTHER APPLICATION ***" << endl;
@@ -36,6 +36,44 @@ void testParameter(const Parameters &baseParams, int gameCount, const string &pa
     }
 }
 
+void testMonsters(const Parameters &params, int gameCount, int monsterGroup)
+{
+    ofstream file("monsterResults.csv");
+    if (file.fail())
+    {
+        cout << " *** FAILED TO OPEN RESULTS FILE, IN USE BY ANOTHER APPLICATION ***" << endl;
+        cin.get();
+        return;
+    }
+    file << "monsterGroup" << monsterGroup << ",expectation";
+
+    for (int score = 0; score <= 20; score++)
+        file << "," << "s" << score;
+    for (int monstersLeft = 0; monstersLeft <= 4; monstersLeft++)
+        file << "," << "m" << monstersLeft;
+    file << endl;
+
+    MonsterCollection monsters;
+    monsters.init(params);
+    const vector<Monster> &group = monsters.monsterGroups[monsterGroup];
+
+    for (int monsterIndex = 0; monsterIndex < (int)group.size(); monsterIndex++)
+    {
+        string name = group[monsterIndex].name;
+        cout << endl << "*** testing " << name << endl;
+        
+        GameDistribution dist;
+        dist.simulate(params, gameCount, name);
+
+        file << name << "," << dist.expectation(dist.scoreDistribution);
+        for (int score = 0; score <= 20; score++)
+            file << "," << dist.scoreDistribution[score];
+        for (int monstersLeft = 0; monstersLeft <= 4; monstersLeft++)
+            file << "," << dist.monsterLeftDistribution[monstersLeft];
+        file << endl;
+    }
+}
+
 void main()
 {
     //
@@ -45,6 +83,17 @@ void main()
     Parameters params("defaultParams.txt");
 
     const bool testSingleGame = false;
+    const bool testParameters = false;
+    const bool testMonsterGroup = true;
+
+    const string testParameterName = "desperationTurnThreshold";
+    const int testParameterLowValue = 0;
+    const int testParameterHighValue = 6;
+    const int testParameterIncrement = 1;
+    const int testGameCount = 1000;
+
+    const int monsterGroupIndex = 0;
+
     if (testSingleGame)
     {
         Game game;
@@ -53,11 +102,13 @@ void main()
         game.runToCompletion(params);
     }
 
-    const string testParameterName = "desperationTurnThreshold";
-    const int testParameterLowValue = 0;
-    const int testParameterHighValue = 6;
-    const int testParameterIncrement = 1;
-    const int testGameCount = 1000;
+    if (testParameters)
+    {
+        testParameter(params, testGameCount, testParameterName, testParameterLowValue, testParameterHighValue, testParameterIncrement);
+    }
 
-    testParameter(params, testGameCount, testParameterName, testParameterLowValue, testParameterHighValue, testParameterIncrement);
+    if (testMonsterGroup)
+    {
+        testMonsters(params, testGameCount, monsterGroupIndex);
+    }
 }

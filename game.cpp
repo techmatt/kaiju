@@ -122,6 +122,8 @@ void Game::fightMonster(const Parameters &params, int monsterIndex, const vector
 
     if (verbose) cout << "ACTION: players fight " << m.toString() << " and score " << scoreGained << " points" << endl;
 
+    Assert(scoreGained != 0, "Fighting monster with no score");
+
     for (auto &c : cards)
         players[c.second].discardMonsterAttackCard(c.first);
 
@@ -161,6 +163,7 @@ void Game::processTurn(const Parameters &params)
         {
             int bestMonsterScore = perMonsterCards[monsterToFightIndex].monsterScore;
             if (bestMonsterScore == 5 ||
+                deck.cards.size() == 0 ||
                 (bestMonsterScore >= params.getInt("desperationMinScore") && desperationTurns >= params.getInt("desperationTurnThreshold")))
             {
                 fightMonster(params, monsterToFightIndex, perMonsterCards[monsterToFightIndex].cards);

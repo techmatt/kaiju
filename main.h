@@ -18,7 +18,7 @@ using namespace std;
 //
 const bool verbose = false;
 
-const bool AIDiscardsRandomly = true;
+const bool AIDiscardsSemiRandomly = true;
 
 //
 // Kaiju-specific includes
