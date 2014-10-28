@@ -25,7 +25,7 @@ void testParameter(const Parameters &baseParams, int gameCount, const string &pa
         newParams.setInt(parameterName, value);
 
         GameDistribution dist;
-        dist.simulate(newParams, gameCount);
+        dist.simulate(newParams, gameCount, "");
         
         file << value << "," << dist.expectation(dist.scoreDistribution);
         for (int score = 0; score <= 20; score++)
@@ -49,7 +49,7 @@ void main()
     {
         Game game;
 
-        game.init(params);
+        game.init(params, "");
         game.runToCompletion(params);
     }
 

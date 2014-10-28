@@ -74,6 +74,9 @@ vector<Monster> MonsterCollection::chooseMonsters(int monsterCount, const string
     while (true)
     {
         vector<Monster> monsters = chooseMonsters(monsterCount);
+        if (requiredMonster == "")
+            return monsters;
+
         for (const Monster &m : monsters)
         {
             if (m.name == requiredMonster)
