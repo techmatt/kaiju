@@ -1,7 +1,7 @@
 
 #include "main.h"
 
-void Game::init(const Parameters &params)
+void Game::init(const Parameters &params, const string &requiredMonster)
 {
     if (verbose) cout << "Starting new game..." << endl;
 
@@ -20,7 +20,7 @@ void Game::init(const Parameters &params)
         
     MonsterCollection monsterCollection;
     monsterCollection.init(params);
-    monsters = monsterCollection.chooseMonsters(params.getInt("monsterCount"));
+    monsters = monsterCollection.chooseMonsters(params.getInt("monsterCount"), requiredMonster);
 
     informationTokens = params.getInt("startInformationCount");
     

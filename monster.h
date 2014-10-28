@@ -45,8 +45,10 @@ struct MonsterCollection
 {
     void init(const Parameters &params);
     vector<Monster> chooseMonsters(int monsterCount);
+    vector<Monster> chooseMonsters(int monsterCount, const string &requiredMonster);
 
-    vector<Monster> monsters;
+    static const int monsterGroupCount = 4;
+    vector<Monster> monsterGroups[monsterGroupCount];
 };
 
 /*
@@ -56,4 +58,10 @@ when you fail, the monster goes away.
 Random monster ideas (move this to google doc)
 
 Requires at least X cards to kill
+
+Monster categories:
+A: Red and yellow, peak red
+B: yellow and blue, peak yellow
+C: blue and red, peak blue
+D: variable
 */

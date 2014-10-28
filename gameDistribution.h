@@ -8,7 +8,7 @@ struct GameDistribution
         for (int monsterCount = 0; monsterCount <= 5; monsterCount++)
             monsterLeftDistribution[monsterCount] = 0.0;
     }
-    void simulate(const Parameters &params, int gameCount);
+    void simulate(const Parameters &params, int gameCount, const string &requiredMonster);
     
     static void normalize(map<int, double> &m);
     static double expectation(const map<int, double> &m);

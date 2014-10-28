@@ -1,7 +1,7 @@
 
 #include "main.h"
 
-void GameDistribution::simulate(const Parameters &params, int gameCount)
+void GameDistribution::simulate(const Parameters &params, int gameCount, const string &requiredMonster)
 {
 #pragma omp parallel for
     for (int gameIndex = 0; gameIndex < gameCount; gameIndex++)
@@ -9,7 +9,7 @@ void GameDistribution::simulate(const Parameters &params, int gameCount)
         if (gameIndex % 100 == 0) cout << "game " << gameIndex << " / " << gameCount << endl;
 
         Game game;
-        game.init(params);
+        game.init(params, requiredMonster);
         game.runToCompletion(params);
 
         //

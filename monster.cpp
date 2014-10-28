@@ -3,14 +3,19 @@
 
 void MonsterCollection::init(const Parameters &params)
 {
+    int monsterBasicPeak = params.getInt("monsterBasicPeak");
     int monsterBasicDouble = params.getInt("monsterBasicDouble");
     int monsterBasicTriple = params.getInt("monsterBasicTriple");
 
-    monsters.push_back(Monster("doubleA", monsterBasicDouble, monsterBasicDouble, 0, 0));
-    monsters.push_back(Monster("doubleB", monsterBasicDouble, 0, monsterBasicDouble, 0));
-    monsters.push_back(Monster("doubleC", 0, monsterBasicDouble, monsterBasicDouble, 0));
+    monsterGroups[0].push_back(Monster("doubleA", monsterBasicDouble, monsterBasicDouble, 0, 0));
+    monsterGroups[1].push_back(Monster("doubleB", monsterBasicDouble, 0, monsterBasicDouble, 0));
+    monsterGroups[2].push_back(Monster("doubleC", 0, monsterBasicDouble, monsterBasicDouble, 0));
 
-    monsters.push_back(Monster("triple", monsterBasicTriple, monsterBasicTriple, monsterBasicTriple, 0));
+    monsterGroups[0].push_back(Monster("peakA", monsterBasicPeak, 0, 0, 0));
+    monsterGroups[1].push_back(Monster("peakB", 0, monsterBasicPeak, 0, 0));
+    monsterGroups[2].push_back(Monster("peakC", 0, 0, monsterBasicPeak, 0));
+
+    monsterGroups[3].push_back(Monster("triple", monsterBasicTriple, monsterBasicTriple, monsterBasicTriple, 0));
 }
 
 int Monster::score(const pair<Card, int>* cards, int cardCount) const
@@ -51,12 +56,29 @@ int Monster::score(const pair<Card, int>* cards, int cardCount) const
 
 vector<Monster> MonsterCollection::chooseMonsters(int monsterCount)
 {
-    random_shuffle(monsters.begin(), monsters.end());
+    Assert(monsterCount == monsterGroupCount, "unexpected number of monsters");
+
+    for (auto &group : monsterGroups)
+        random_shuffle(group.begin(), group.end());
 
     vector<Monster> result;
     for (int i = 0; i < monsterCount; i++)
     {
-        result.push_back(monsters[i]);
+        result.push_back(monsterGroups[i][0]);
     }
     return result;
+}
+
+vector<Monster> MonsterCollection::chooseMonsters(int monsterCount, const string &requiredMonster)
+{
+    while (true)
+    {
+        vector<Monster> monsters = chooseMonsters(monsterCount);
+        for (const Monster &m : monsters)
+        {
+            if (m.name == requiredMonster)
+                return monsters;
+        }
+    }
+    return vector<Monster>();
 }

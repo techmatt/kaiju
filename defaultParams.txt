@@ -25,10 +25,10 @@ pure3Count=2
 pure4Count=0
 pure5Count=1
 pure6Count=0
-pure7Count=1
+pure7Count=0
 pure8Count=0
 pure9Count=0
-pure10Count=0
+pure10Count=1
 
 double1Count=2
 double2Count=2
@@ -42,5 +42,6 @@ triple3Count=1
 # monster parameters
 #
 
+monsterBasicPeak=15
 monsterBasicDouble=12
 monsterBasicTriple=8

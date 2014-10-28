@@ -28,7 +28,7 @@ struct MonsterFightData
 
 struct Game
 {
-    void init(const Parameters &params);
+    void init(const Parameters &params, const string &requiredMonster);
 
     void runToCompletion(const Parameters &params);
     void processTurn(const Parameters &params);
