@@ -18,6 +18,8 @@ using namespace std;
 //
 const bool verbose = false;
 
+const bool AIDiscardsRandomly = true;
+
 //
 // Kaiju-specific includes
 //

@@ -11,9 +11,9 @@ monsterVictoryInformation=1
 #
 # AI parameters
 #
-spentInformationRequirement=3
-desperationTurnThreshold=2
-desperationMinScore=2
+spentInformationRequirement=4
+desperationTurnThreshold=3
+desperationMinScore=3
 
 #
 # deck parameters
@@ -26,6 +26,9 @@ pure4Count=0
 pure5Count=1
 pure6Count=0
 pure7Count=1
+pure8Count=0
+pure9Count=0
+pure10Count=0
 
 double1Count=2
 double2Count=2

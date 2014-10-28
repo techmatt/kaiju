@@ -26,6 +26,7 @@ void Game::init(const Parameters &params)
     
     activePlayer = 0;
     turn = 1;
+    gameEndTurn = 1000;
 
     spentInformation = 0;
     desperationTurns = 0;
@@ -43,18 +44,23 @@ void Game::runToCompletion(const Parameters &params)
         activePlayer = (activePlayer + 1) % players.size();
         turn++;
 
-        if (monsters.size() == 0)
+        if (deck.cards.size() == 0 && gameEndTurn == 1000)
         {
-            if (verbose) cout << "no monsters left, game over" << endl;
+            if (verbose) cout << "no cards left in deck, game ending in 4 turns" << endl;
+
+            spentInformation = params.getInt("spentInformationRequirement");
+            gameEndTurn = turn + 4;
+        }
+
+        if (turn >= gameEndTurn)
+        {
+            if (verbose) cout << "deck is empty and all turns elapsed, game over" << endl;
             done = true;
         }
 
-        //
-        // TODO: implement other end-game conditions
-        //
-        if (deck.cards.size() == 0)
+        if (monsters.size() == 0)
         {
-            if (verbose) cout << "no cards left in deck, game over" << endl;
+            if (verbose) cout << "no monsters left, game over" << endl;
             done = true;
         }
 

@@ -4,6 +4,12 @@
 void testParameter(const Parameters &baseParams, int gameCount, const string &parameterName, int lowValue, int highValue, int increment)
 {
     ofstream file("results.csv");
+    if (file.fail())
+    {
+        cout << " *** FAILED TO OPEN RESULTS FILE, IN USE BY ANOTHER APPLICATION ***" << endl;
+        cin.get();
+        return;
+    }
     file << parameterName << ",expectation";
 
     for (int score = 0; score <= 20; score++)
@@ -47,9 +53,9 @@ void main()
         game.runToCompletion(params);
     }
 
-    const string testParameterName = "desperationMinScore";
-    const int testParameterLowValue = 1;
-    const int testParameterHighValue = 5;
+    const string testParameterName = "desperationTurnThreshold";
+    const int testParameterLowValue = 0;
+    const int testParameterHighValue = 6;
     const int testParameterIncrement = 1;
     const int testGameCount = 1000;
 

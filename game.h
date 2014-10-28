@@ -59,6 +59,7 @@ struct Game
 
     int activePlayer;
     int turn;
+    int gameEndTurn;
 
     //
     // this is the number of information the AIs have spent since the previous

@@ -34,7 +34,11 @@ void Player::discardWorstCard()
 {
     auto cardUtility = [](const Card &c)
     {
-        return c.colors[0] + c.colors[1] + c.colors[2];
+        int sum = c.colors[0] + c.colors[1] + c.colors[2];
+        if (AIDiscardsRandomly && sum <= 6)
+            sum = 0;
+
+        return sum;
     };
     auto cardSort = [&](const Card &a, const Card &b)
     {
@@ -42,7 +46,8 @@ void Player::discardWorstCard()
     };
 
     random_shuffle(hand.begin(), hand.end());
-    sort(hand.begin(), hand.end(), cardSort);
+
+    stable_sort(hand.begin(), hand.end(), cardSort);
 
     if (verbose) cout << "ACTION: " << id << " discards " << hand[hand.size() - 1].toString() << endl;
 

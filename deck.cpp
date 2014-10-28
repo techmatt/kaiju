@@ -8,7 +8,7 @@ void Deck::init(const Parameters &params)
     //
     // add pure cards
     //
-    for (int cardinality = 1; cardinality <= 7; cardinality++)
+    for (int cardinality = 1; cardinality <= 10; cardinality++)
     {
         //
         // read count from file, ex. pure1Count = 2
