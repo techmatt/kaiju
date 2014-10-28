@@ -5,14 +5,14 @@
 
 playerCount=4
 monsterCount=4
-startInformationCount=6
+startInformationCount=4
 monsterVictoryInformation=1
 
 #
 # AI parameters
 #
-spentInformationRequirement=3
-desperationTurnThreshold=3
+spentInformationRequirement=4
+desperationTurnThreshold=5
 desperationMinScore=3
 
 #
@@ -23,9 +23,9 @@ pure1Count=2
 pure2Count=2
 pure3Count=2
 pure4Count=0
-pure5Count=0
+pure5Count=2
 pure6Count=0
-pure7Count=1
+pure7Count=0
 pure8Count=0
 pure9Count=0
 pure10Count=1
@@ -42,6 +42,7 @@ triple3Count=1
 # monster parameters
 #
 
-monsterBasicPeak=15
-monsterBasicDouble=10
-monsterBasicTriple=8
+monsterSingle=16
+monsterDouble=10
+monsterTriple=8
+monsterTriplePure=6

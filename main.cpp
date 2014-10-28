@@ -82,17 +82,17 @@ void main()
     srand((unsigned int)time(0));
     Parameters params("defaultParams.txt");
 
-    const bool testSingleGame = false;
+    const bool testSingleGame = true;
     const bool testParameters = false;
-    const bool testMonsterGroup = true;
+    const bool testMonsterGroup = false;
 
-    const string testParameterName = "desperationTurnThreshold";
-    const int testParameterLowValue = 0;
-    const int testParameterHighValue = 6;
+    const string testParameterName = "monsterTriplePure";
+    const int testParameterLowValue = 6;
+    const int testParameterHighValue = 10;
     const int testParameterIncrement = 1;
-    const int testGameCount = 1000;
+    const int testGameCount = 2000;
 
-    const int monsterGroupIndex = 0;
+    const int monsterGroupIndex = 3;
 
     if (testSingleGame)
     {

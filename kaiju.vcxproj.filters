@@ -23,7 +23,4 @@
   <ItemGroup>
     <Text Include="defaultParams.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="results.csv" />
-  </ItemGroup>
 </Project>

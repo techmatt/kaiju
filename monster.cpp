@@ -3,24 +3,35 @@
 
 void MonsterCollection::init(const Parameters &params)
 {
-    int monsterBasicPeak = params.getInt("monsterBasicPeak");
-    int monsterBasicDouble = params.getInt("monsterBasicDouble");
-    int monsterBasicTriple = params.getInt("monsterBasicTriple");
+    int monsterSingle = params.getInt("monsterSingle");
+    int monsterDouble = params.getInt("monsterDouble");
+    int monsterTriple = params.getInt("monsterTriple");
+    int monsterTriplePure = params.getInt("monsterTriplePure");
 
-    monsterGroups[0].push_back(Monster("doubleA", monsterBasicDouble, monsterBasicDouble, 0, 0));
-    monsterGroups[1].push_back(Monster("doubleB", monsterBasicDouble, 0, monsterBasicDouble, 0));
-    monsterGroups[2].push_back(Monster("doubleC", 0, monsterBasicDouble, monsterBasicDouble, 0));
+    monsterGroups[0].push_back(Monster("doubleA", monsterDouble, monsterDouble, 0, 0));
+    monsterGroups[1].push_back(Monster("doubleB", monsterDouble, 0, monsterDouble, 0));
+    monsterGroups[2].push_back(Monster("doubleC", 0, monsterDouble, monsterDouble, 0));
 
-    monsterGroups[0].push_back(Monster("peakA", monsterBasicPeak, 0, 0, 0));
-    monsterGroups[1].push_back(Monster("peakB", 0, monsterBasicPeak, 0, 0));
-    monsterGroups[2].push_back(Monster("peakC", 0, 0, monsterBasicPeak, 0));
+    monsterGroups[0].push_back(Monster("peakA", monsterSingle, 0, 0, 0));
+    monsterGroups[1].push_back(Monster("peakB", 0, monsterSingle, 0, 0));
+    monsterGroups[2].push_back(Monster("peakC", 0, 0, monsterSingle, 0));
 
-    monsterGroups[3].push_back(Monster("triple", monsterBasicTriple, monsterBasicTriple, monsterBasicTriple, 0));
+    monsterGroups[3].push_back(Monster("triple", monsterTriple, monsterTriple, monsterTriple, 0));
+    monsterGroups[3].push_back(Monster("triplePure", monsterTriplePure, monsterTriplePure, monsterTriplePure, 0));
 }
 
 int Monster::score(const pair<Card, int>* cards, int cardCount) const
 {
     int colorSum[ColorCount] = { 0, 0, 0 };
+
+    if (name == "triplePure")
+    {
+        for (int cardIndex = 0; cardIndex < cardCount; cardIndex++)
+        {
+            if (cards[cardIndex].first.type != CardTypePure)
+                return 0;
+        }
+    }
 
     for (int cardIndex = 0; cardIndex < cardCount; cardIndex++)
     {

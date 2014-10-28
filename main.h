@@ -16,7 +16,7 @@ using namespace std;
 // when verbose is true, the game state is outputted to the console.
 // should never be true when actually optimizing.
 //
-const bool verbose = false;
+const bool verbose = true;
 
 const bool AIDiscardsSemiRandomly = true;
 

@@ -35,7 +35,7 @@ void Player::discardWorstCard()
     auto cardUtility = [](const Card &c)
     {
         int sum = c.colors[0] + c.colors[1] + c.colors[2];
-        if (AIDiscardsSemiRandomly && sum <= 5)
+        if (AIDiscardsSemiRandomly && sum <= 4)
             sum = 0;
 
         return sum;
