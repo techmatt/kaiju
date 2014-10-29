@@ -17,6 +17,7 @@ int Test::testMonsterSubsetDifficultyTrial(const Parameters &params, Deck &deck,
 
     const int totalCardCount = (int)totalCards.size();
     int totalSubsets = (1 << totalCardCount);
+    auto totalCardsCArray = &totalCards[0];
     pair<Card, int> subsetCards[32];
 
     for (int subsetIndex = 1; subsetIndex < totalSubsets; subsetIndex++)
@@ -28,12 +29,13 @@ int Test::testMonsterSubsetDifficultyTrial(const Parameters &params, Deck &deck,
         for (int cardIndex = 0; cardIndex < totalCardCount; cardIndex++)
         {
             if (subsetIndex & (1 << cardIndex))
-                subsetCards[subsetCardCount++] = totalCards[cardIndex];
+                subsetCards[subsetCardCount++] = totalCardsCArray[cardIndex];
         }
 
         if (subsetCardCount <= subsetSize)
         {
             int score = monster.score(subsetCards, subsetCardCount);
+
             if (score == 5)
                 return 1;
         }
@@ -50,15 +52,20 @@ double Test::testMonsterSubsetDifficulty(const Parameters &params, const Monster
     Deck deck;
     deck.init(params);
 
-    int success = 0;
+    int successTotal = 0;
 
+#pragma omp parallel for
     for (int trialIndex = 0; trialIndex < trialCount; trialIndex++)
-        success += testMonsterSubsetDifficultyTrial(params, deck, monster, subsetSize, playerCount, handSize);
-
-    return (double)success / (double)trialCount;
+    {
+        int success = testMonsterSubsetDifficultyTrial(params, deck, monster, subsetSize, playerCount, handSize);
+        if (success)
+            successTotal++;
+    }
+    
+    return (double)successTotal / (double)trialCount;
 }
 
-void Test::testMonsterParameters(const Parameters &params, int startRed, int endRed, int yellow, int blue)
+void Test::testMonsterRange(const Parameters &params, int startRed, int endRed, int yellow, int blue, int trialCount)
 {
     ofstream file("monsterResults.csv");
     if (file.fail())
@@ -70,12 +77,11 @@ void Test::testMonsterParameters(const Parameters &params, int startRed, int end
 
     file << "Monster";
     for (int subsetSize = 1; subsetSize <= 16; subsetSize++)
-        file << "," << subsetSize;
+        file << ",s" << subsetSize;
     file << endl;
 
     for (int red = startRed; red <= endRed; red++)
     {
-        //const string &_name, int redStrength, int yellowStrength, int blueStrength, int _anyStrength
         Monster monster("temp", red, yellow, blue, 0);
         
         file << red << "-" << yellow << "-" << blue;
@@ -84,7 +90,7 @@ void Test::testMonsterParameters(const Parameters &params, int startRed, int end
         {
             cout << "testing red=" << red << ", subset=" << subsetSize << endl;
             file << ",";
-            file << testMonsterSubsetDifficulty(params, monster, subsetSize, 4, 4, 1000);
+            file << testMonsterSubsetDifficulty(params, monster, subsetSize, 4, 4, trialCount);
         }
         file << endl;
     }

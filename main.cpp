@@ -42,6 +42,6 @@ void main()
 
     if (testMonsterParameters)
     {
-        Test::testMonsterParameters(params, 1, 20, 0, 0);
+        Test::testMonsterRange(params, 16, 16, 0, 0, 10000);
     }
 }

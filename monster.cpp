@@ -70,7 +70,7 @@ int Monster::score(const pair<Card, int>* cards, int cardCount) const
         excess[maxIndex] = 0;
     }
 
-    int totalExcess = 0;
+    int totalExcess = excess[0] + excess[1] + excess[2];
 
     if (totalExcess < anyStrength)
         return 0;
