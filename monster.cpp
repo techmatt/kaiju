@@ -40,13 +40,13 @@ int Monster::score(const pair<Card, int>* cards, int cardCount) const
             colorSum[colorIndex] += card.colors[colorIndex];
     }
 
-    int excess = 0;
+    int excess[ColorCount] = { 0, 0, 0 };
     
     for (int colorIndex = 0; colorIndex < 3; colorIndex++)
     {
         if (colorSum[colorIndex] >= strength[colorIndex])
         {
-            excess += colorSum[colorIndex] - strength[colorIndex];
+            excess[colorIndex] = colorSum[colorIndex] - strength[colorIndex];
         }
         else
         {
@@ -54,15 +54,33 @@ int Monster::score(const pair<Card, int>* cards, int cardCount) const
         }
     }
 
-    if (excess < anyStrength)
+    int diamondCount = 0;
+    for (int cardIndex = 0; cardIndex < cardCount; cardIndex++)
+    {
+        if (cards[cardIndex].first.type == CardTypeDiamond)
+            diamondCount++;
+    }
+    
+    //
+    // diamonds remove excess
+    //
+    for (int diamondIndex = 0; diamondIndex < diamondCount; diamondIndex++)
+    {
+        int maxIndex = util::maxIndex(excess[0], excess[1], excess[2]);
+        excess[maxIndex] = 0;
+    }
+
+    int totalExcess = 0;
+
+    if (totalExcess < anyStrength)
         return 0;
 
-    excess -= anyStrength;
+    totalExcess -= anyStrength;
 
     //
     // TODO: parameterize score. Currently assumes 5,4,3,2,1,1,...,1 scale.
     //
-    return max(1, 5 - excess);
+    return max(1, 5 - totalExcess);
 }
 
 vector<Monster> MonsterCollection::chooseMonsters(int monsterCount)

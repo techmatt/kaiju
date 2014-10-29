@@ -1,18 +1,17 @@
 
 #include "main.h"
 
-int Test::testMonsterSubsetDifficultyTrial(const Parameters &params, const Monster &monster, int subsetSize, int playerCount, int handSize)
+int Test::testMonsterSubsetDifficultyTrial(const Parameters &params, Deck &deck, const Monster &monster, int subsetSize, int playerCount, int handSize)
 {
-    Deck deck;
-    deck.init(params);
+    deck.shuffle();
 
+    int deckIndex = 0;
     vector< pair<Card, int> > totalCards;
     for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
     {
         for (int handIndex = 0; handIndex < handSize; handIndex++)
         {
-            totalCards.push_back(make_pair(deck.cards.back(), playerIndex));
-            deck.cards.pop_back();
+            totalCards.push_back(make_pair(deck.cards[deckIndex++], playerIndex));
         }
     }
 
@@ -48,13 +47,47 @@ int Test::testMonsterSubsetDifficultyTrial(const Parameters &params, const Monst
 //
 double Test::testMonsterSubsetDifficulty(const Parameters &params, const Monster &monster, int subsetSize, int playerCount, int handSize, int trialCount)
 {
+    Deck deck;
+    deck.init(params);
+
     int success = 0;
 
     for (int trialIndex = 0; trialIndex < trialCount; trialIndex++)
-    {
-        success += testMonsterSubsetDifficultyTrial(params, monster, subsetSize, playerCount, handSize);
-    }
+        success += testMonsterSubsetDifficultyTrial(params, deck, monster, subsetSize, playerCount, handSize);
+
     return (double)success / (double)trialCount;
+}
+
+void Test::testMonsterParameters(const Parameters &params, int startRed, int endRed, int yellow, int blue)
+{
+    ofstream file("monsterResults.csv");
+    if (file.fail())
+    {
+        cout << " *** FAILED TO OPEN RESULTS FILE, IN USE BY ANOTHER APPLICATION ***" << endl;
+        cin.get();
+        return;
+    }
+
+    file << "Monster";
+    for (int subsetSize = 1; subsetSize <= 16; subsetSize++)
+        file << "," << subsetSize;
+    file << endl;
+
+    for (int red = startRed; red <= endRed; red++)
+    {
+        //const string &_name, int redStrength, int yellowStrength, int blueStrength, int _anyStrength
+        Monster monster("temp", red, yellow, blue, 0);
+        
+        file << red << "-" << yellow << "-" << blue;
+
+        for (int subsetSize = 1; subsetSize <= 16; subsetSize++)
+        {
+            cout << "testing red=" << red << ", subset=" << subsetSize << endl;
+            file << ",";
+            file << testMonsterSubsetDifficulty(params, monster, subsetSize, 4, 4, 1000);
+        }
+        file << endl;
+    }
 }
 
 void Test::testParameter(const Parameters &baseParams, int gameCount, const string &parameterName, int lowValue, int highValue, int increment)

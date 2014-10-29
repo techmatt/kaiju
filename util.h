@@ -8,6 +8,22 @@ inline void Assert(bool statement, const string &description)
 }
 
 //
+// math utilities
+//
+namespace util
+{
+    inline int maxIndex(int a, int b, int c)
+    {
+        if (a >= b && a >= c)
+            return 0;
+        if (b >= c)
+            return 1;
+        return 2;
+    }
+}
+
+
+//
 // file utilities
 //
 vector<string> getFileLines(ifstream &file, int minLineLength);

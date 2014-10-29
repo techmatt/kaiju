@@ -10,8 +10,9 @@ void main()
     Parameters params("defaultParams.txt");
 
     const bool testSingleGame = false;
-    const bool testParameters = true;
+    const bool testParameters = false;
     const bool testMonsterGroup = false;
+    const bool testMonsterParameters = true;
 
     const string testParameterName = "monsterTriplePure";
     const int testParameterLowValue = 6;
@@ -37,5 +38,10 @@ void main()
     if (testMonsterGroup)
     {
         Test::testMonsters(params, testGameCount, monsterGroupIndex);
+    }
+
+    if (testMonsterParameters)
+    {
+        Test::testMonsterParameters(params, 1, 20, 0, 0);
     }
 }
