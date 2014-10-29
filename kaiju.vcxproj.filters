@@ -9,6 +9,7 @@
     <ClInclude Include="util.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="gameDistribution.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -19,6 +20,7 @@
     <ClCompile Include="util.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="gameDistribution.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="defaultParams.txt" />

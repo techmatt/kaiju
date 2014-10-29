@@ -4,6 +4,7 @@ enum CardType
     CardTypePure,
     CardTypeDouble,
     CardTypeTriple,
+    CardTypeDiamond,
 };
 
 enum Color
@@ -26,6 +27,9 @@ struct Card
     }
     string toString() const
     {
+        if (type == CardTypeDiamond)
+            return "C-di";
+
         return "C" + to_string(colors[0]) + to_string(colors[1]) + to_string(colors[2]);
     }
     CardType type;

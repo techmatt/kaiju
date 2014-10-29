@@ -60,9 +60,9 @@ int Monster::score(const pair<Card, int>* cards, int cardCount) const
     excess -= anyStrength;
 
     //
-    // TODO: parameterize score. Currently assumes 5,4,3,2,1,0 scale.
+    // TODO: parameterize score. Currently assumes 5,4,3,2,1,1,...,1 scale.
     //
-    return max(0, 5 - excess);
+    return max(1, 5 - excess);
 }
 
 vector<Monster> MonsterCollection::chooseMonsters(int monsterCount)

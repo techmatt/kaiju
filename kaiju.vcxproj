@@ -92,6 +92,7 @@
     <ClInclude Include="monster.h" />
     <ClInclude Include="parameters.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="test.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,7 @@
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="parameters.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ monsterVictoryInformation=1
 # AI parameters
 #
 spentInformationRequirement=4
-desperationTurnThreshold=5
+desperationTurnThreshold=2
 desperationMinScore=3
 
 #
@@ -25,10 +25,10 @@ pure3Count=2
 pure4Count=0
 pure5Count=2
 pure6Count=0
-pure7Count=0
+pure7Count=1
 pure8Count=0
 pure9Count=0
-pure10Count=1
+pure10Count=0
 
 double1Count=2
 double2Count=2
@@ -37,6 +37,8 @@ double3Count=2
 triple1Count=1
 triple2Count=1
 triple3Count=1
+
+diamondCount=2
 
 #
 # monster parameters
