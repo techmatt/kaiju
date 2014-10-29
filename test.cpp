@@ -54,7 +54,8 @@ double Test::testMonsterSubsetDifficulty(const Parameters &params, const Monster
 
     int successTotal = 0;
 
-#pragma omp parallel for
+    //this for loop cannot be parallelized atomically
+//#pragma omp parallel for
     for (int trialIndex = 0; trialIndex < trialCount; trialIndex++)
     {
         int success = testMonsterSubsetDifficultyTrial(params, deck, monster, subsetSize, playerCount, handSize);
@@ -82,13 +83,16 @@ void Test::testMonsterRange(const Parameters &params, int startRed, int endRed, 
 
     for (int red = startRed; red <= endRed; red++)
     {
+        yellow = red;
+        //blue = red;
+
         Monster monster("temp", red, yellow, blue, 0);
         
-        file << red << "-" << yellow << "-" << blue;
+        file << "standard " << red << "-" << yellow << "-" << blue;
 
         for (int subsetSize = 1; subsetSize <= 16; subsetSize++)
         {
-            cout << "testing red=" << red << ", subset=" << subsetSize << endl;
+            cout << "testing " << red << "-" << yellow << "-" << blue << ", subset=" << subsetSize << endl;
             file << ",";
             file << testMonsterSubsetDifficulty(params, monster, subsetSize, 4, 4, trialCount);
         }
